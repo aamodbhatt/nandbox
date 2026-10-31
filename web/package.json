@@ -1,0 +1,13 @@
+{
+  "name": "nandbox-web",
+  "private": true,
+  "description": "Type-checking and linting for the nandbox editor. Bundling uses esbuild's Go API (go generate ./web), so Node is only needed for these checks.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "typescript": "5.9.3"
+  }
+}
