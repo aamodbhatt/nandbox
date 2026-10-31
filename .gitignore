@@ -1,0 +1,29 @@
+# Go / build outputs
+/bin/
+/dist/
+/build/
+*.test
+*.out
+coverage.*
+
+# Node
+node_modules/
+
+# Runtime data
+/data/
+/runs/
+/artifacts/
+/.jobs/
+/.cache/
+*.db
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Capture outputs (the committed media lives in docs/assets)
+tools/capture/frames/
+tools/capture/stills/
