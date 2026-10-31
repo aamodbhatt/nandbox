@@ -1,0 +1,16 @@
+{
+  "name": "nandbox-capture",
+  "private": true,
+  "description": "Captures the README screenshots and GIF from a running nandbox server.",
+  "type": "module",
+  "scripts": {
+    "capture": "node capture.mjs frames stills",
+    "gif": "node make-gif.mjs frames ../../docs/assets/hero.gif",
+    "e2e": "node e2e.mjs"
+  },
+  "devDependencies": {
+    "gifenc": "^1.0.3",
+    "playwright": "1.56.1",
+    "pngjs": "^7.0.0"
+  }
+}
