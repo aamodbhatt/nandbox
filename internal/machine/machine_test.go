@@ -28,6 +28,17 @@ func assemble(t *testing.T, src string, opts ...asm.Option) *asm.Program {
 	return p
 }
 
+// TestComputerSize pins the size of the Snake computer quoted in README.md and
+// docs/DESIGN.md.
+func TestComputerSize(t *testing.T) {
+	p := assemble(t, source(t, "snake"))
+	m := build(t, p.Code, p.Data)
+	st := m.Sim.Netlist().Stats()
+	if st.Nands != 1521 || st.DFFs != 76 || st.Levels != 43 {
+		t.Fatalf("computer is %d NANDs, %d DFFs, %d levels; want 1521, 76, 43", st.Nands, st.DFFs, st.Levels)
+	}
+}
+
 // TestEveryOpcode runs one small program per opcode on the gate-level CPU and
 // checks the destination register and all three flags.
 func TestEveryOpcode(t *testing.T) {

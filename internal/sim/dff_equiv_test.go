@@ -116,5 +116,5 @@ func TestDFFPrimitiveMatchesNandMasterSlave(t *testing.T) {
 			}
 		}
 	}
-	t.Logf("verified %d input sequences (%d steps each)", runs, depth)
+	t.Logf("verified %d runs: %d input sequences (%d steps each) on both engines", runs, runs/2, depth)
 }

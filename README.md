@@ -128,7 +128,8 @@ flowchart LR
   committed together, so shift registers and ripple counters behave correctly.
 * **The DFF proof.** A master-slave flip-flop is nine NANDs with feedback that a
   levelized simulator cannot run, so the DFF is a primitive, and a test drives
-  both through all 65,536 sequences of 12 input changes from every start state.
+  both through all 4,096 sequences of 12 input changes from each of the 8 start
+  states: 32,768 sequences, each checked on both engines (65,536 runs).
 * **A CPU that is easy to watch.** Operand B is simultaneously the ALU input,
   the memory address and the jump target, and the ROM's output register is the
   instruction register, so the datapath is a handful of buses. Loads write back
@@ -151,14 +152,14 @@ player, 3 s per engine, single core):
 |---|---|---:|---:|---:|
 | Intel Core Ultra 9 275HX laptop, Windows 11 | event-driven | **339 kHz** | 117 M | 346 |
 | Intel Core Ultra 9 275HX laptop, Windows 11 | full sweep | 199 kHz | 910 M | 4,563 |
-| Shared cloud pod, Xeon Gold 6342 (CPU quota, busy neighbours), Linux | event-driven | 115 kHz | 40 M | 348 |
-| Shared cloud pod, Xeon Gold 6342 (CPU quota, busy neighbours), Linux | full sweep | 31 kHz | 142 M | 4,563 |
+| Shared cloud VM, Xeon Gold 6342 (CPU quota, busy neighbours), Linux | event-driven | 115 kHz | 40 M | 348 |
+| Shared cloud VM, Xeon Gold 6342 (CPU quota, busy neighbours), Linux | full sweep | 31 kHz | 142 M | 4,563 |
 
 The target was 50 kHz; on the laptop the event-driven engine runs the CPU about
-6.8× faster than that, and even on the contended shared pod it clears it by
-2.3×. Event-driven evaluation does 13× less work per cycle than a full sweep;
+6.8× faster than that, and even on the contended shared cloud VM it clears it
+by 2.3×. Event-driven evaluation does 13× less work per cycle than a full sweep;
 the sweep's branch-free inner loop is faster per gate, which is why it is only
-1.7× behind on the laptop (3.7× on the pod).
+1.7× behind on the laptop (3.7× on the cloud VM).
 `go test -bench Snake ./internal/machine` reports the same metrics (354 kHz and
 235 kHz on the laptop). A room runs at 60 kHz by default, where `snake.asm`
 moves about 7 cells per second; the speed slider goes from 1 Hz (watch single

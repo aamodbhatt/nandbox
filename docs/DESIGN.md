@@ -117,8 +117,9 @@ State is held by three kinds of primitive:
 * **D flip-flops.** A textbook positive-edge master-slave flip-flop is nine
   NANDs with two feedback loops, which a levelized simulator cannot evaluate.
   So the DFF is a primitive, and `TestDFFPrimitiveMatchesNandMasterSlave`
-  proves it equivalent to the nine-NAND circuit: every start state, every
-  sequence of 12 single-input changes (65,536 sequences), checked against a
+  proves it equivalent to the nine-NAND circuit: from each of the 8 start
+  states, every sequence of 12 single-input changes (4,096 per start state,
+  32,768 sequences), each checked on both engines (65,536 runs) against a
   gate-at-a-time relaxation simulator of the NAND version.
 * **RAM and ROM** (and the LED matrix, which is a 256-byte RAM with a display).
   Building 256 bytes of RAM from flip-flops would add ~2,000 flip-flops and a
